@@ -11,20 +11,12 @@ const initState={
 
 const rootReducer = (state=initState,action) => {
     switch(action.type) {
-        /*case 'INPUT_GST_CHANGE':
-            return Object.assign({},state,{gstPercent:action.value});
-        case 'INPUT_PRICE_CHANGE':
-            return Object.assign({},state,{netPrice:action.text});
-        */
-        case 'CALCUALTE':
-            return {
-                ...state,
-                totalGst:action.totalGst
-            }
-       /* case 'CALCULATE':
+        case 'CALCULATE':
             return Object.assign({}, state, {
-                totalGst: action.fetchValue
-              })*/
+                totalGst: action.gstValue,
+                totalCgst:action.cgstValue,
+                totalPrice:action.totalValue
+              })
         default: 
         return state;
     }

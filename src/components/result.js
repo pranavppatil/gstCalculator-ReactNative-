@@ -5,6 +5,7 @@ import {connect} from 'react-redux';
 class Result extends Component {
     render() {
         return (
+
             <View style={styles.container}>
                 <View style={styles.heading}>
                     <Text style={styles.headingText}>
@@ -13,19 +14,19 @@ class Result extends Component {
                 </View>
                 <View style={styles.headContainer}>
                     <Text style={styles.output}>
-                        Total GST Value is found to be:  {this.props.totalGst}
+                        Total GST Value is found to be {'\u20B9'} {this.props.totalGst}
                     </Text>
                     <Text style={styles.output}>
-                        Total CGST Value is found to be:
+                        Total CGST Value is found to be {'\u20B9'} {this.props.totalCgst}
                     </Text>
 
                     <Text style={styles.output}>
-                        Total SGST Value is found to be:
+                        Total SGST Value is found to be {'\u20B9'} {this.props.totalCgst}
                     </Text>
                 </View>
                 <View style={styles.bodyContainer}>
                     <Text style={styles.finalResult}>
-                        Total Price inclusive of GST is found to be: {this.props.totalGst}
+                        Total Price inclusive of GST is found to be {'\u20B9'} {this.props.totalPrice}
                     </Text>
                 </View>
             </View>
@@ -35,7 +36,9 @@ class Result extends Component {
 
 const mapStateToProps =(state) => {
     return {
-        totalGst:state.totalGst
+        totalGst:state.totalGst,
+        totalCgst:state.totalCgst,
+        totalPrice:state.totalPrice,
     }
 }
 /*

@@ -7,17 +7,16 @@ import {connect} from 'react-redux';
 
 class Input extends Component  {
     constructor(props) {
-        super(props);
-    }
     
-    state={
+        super(props);
+    this.state={
         netPrice:'0',
         gstPercentage:'5',
         totalGst:'0',
         gstVal:'0',
         sgstVal:'0',
     }
-
+    }
     updateGstValue = (value) => {
         this.setState({ gstPercentage: value })
      }
@@ -34,16 +33,13 @@ class Input extends Component  {
             sgstVal: parseInt(this.state.netPrice * this.state.gstPercentage / 200),
             totalGst: parseInt(this.state.netPrice) + parseInt(this.state.netPrice * this.state.gstPercentage / 100),
         })
-        console.log("In function", this.state.totalGst)
+        
     }
 
+
 render() {
-    
-    //console.log(this.state.netPrice)
-    //console.log(this.state.gstPercentage)
-    console.log(this.state.totalGst)
-    //console.log(this.state.gstVal)
-  //  console.log(this.state.sgstVal)
+    this.props.calculation(this.state.gstVal,this.state.sgstVal,this.state.totalGst)
+
         return (
             <>
             <View style={styles.heading}>
@@ -96,17 +92,21 @@ render() {
 }
 }
 
+const mapStateToProps  =(state) => {
+    return {
+    }
+}
+
 const mapDispatchToProps = (dispatch) => {
     return {
 
-        calculation: (value) => {
-            const actionResult= {type:'CALCULATE',fetchValue:value}
-            console.log(value)
-           // dispatch(actionResult);
+        calculation: (gst,cgst,total) => {
+            const actionResult= {type:'CALCULATE',gstValue:gst,cgstValue:cgst,totalValue:total}
+            dispatch(actionResult);
         }
         }
 }
-export default connect(mapDispatchToProps)(Input);
+export default connect(mapStateToProps,mapDispatchToProps)(Input);
 
 const styles=StyleSheet.create({
 heading: {
