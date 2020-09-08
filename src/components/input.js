@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { View,StyleSheet,Text, TextInput,Button} from 'react-native'
+import { View,StyleSheet,Text, TextInput,Button, Alert} from 'react-native'
 import {Picker} from 'react-native'
 import {connect} from 'react-redux';
 
@@ -22,13 +22,37 @@ class Input extends Component  {
      }
 
     onPressCalculate =() => {
-       // validateInput()
-        this.calculateResult()
-        this.props.navigation.navigate('Result')
+        this.validateInput()
+        
     }
     
-    calculateResult = () => {
+    validateInput = () => {
+       // if(!isNaN(parseInt(this.state.netPrice))) {
+        //    console.log(this.state.netPrice)    
+        //}
+        //console.log("Hello")
+        /*if(this.state.netPrice.includes('-')) {
+            var newNetPrice=this.state.netPrice.replace('-','');
+            this.setState({netPrice:newNetPrice})
+        }
+        else if(this.state.netPrice.includes)
         this.setState({
+            netPrice: this.state.netPrice.replace(/\s/g, ''),
+            netPrice:this.state.netPrice.replace('-',''),
+            netPrice:this.state.netPrice.replace('..','')
+        })
+        */
+      if(this.state.netPrice.includes(' ')|| this.state.netPrice.includes('-') || this.state.netPrice.includes('..')) {
+        Alert.alert("Your Price input contains invalid character please enter a number") 
+      }
+      else {
+        this.calculateResult()
+        this.props.navigation.navigate('Result')
+
+      }
+    }
+    calculateResult =() => {
+       this.setState({
             gstVal: parseInt(this.state.netPrice * this.state.gstPercentage / 100),
             sgstVal: parseInt(this.state.netPrice * this.state.gstPercentage / 200),
             totalGst: parseInt(this.state.netPrice) + parseInt(this.state.netPrice * this.state.gstPercentage / 100),
